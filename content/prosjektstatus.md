@@ -1,5 +1,7 @@
 # Prosjektstatus - Parkering Eidsfoss Marked
 
+tester auto opdatering
+
 ## Overordnet Status   forandring på opdate
 
 - **Fremdrift:** 20%
