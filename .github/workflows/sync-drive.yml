@@ -1,8 +1,8 @@
-name: Sync Google Drive Files
+name: Sync Google Drive
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Kjører hvert 5. minutt
+    - cron: '*/5 * * * *'  # Kjør hvert 5. minutt
   workflow_dispatch:  # Tillater manuell kjøring
 
 jobs:
@@ -11,20 +11,30 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Download files from Google Drive
+      - name: Google Drive Files Sync
         uses: pew-actions/google-drive-download@main
         with:
           credentials: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
           files: |
-            1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2:content/arbeidsliste.md
-            1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR:content/beskrivelse.md
-            1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE:content/prosjektstatus.md
-            1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG:content/ressurser.md
-            1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr:content/skilting_og_hensyn.md
+            - id: "1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE"
+              path: "content/prosjektstatus.md"
+            - id: "1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR"
+              path: "content/beskrivelse.md"
+            - id: "1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2"
+              path: "content/arbeidsliste.md"
+            - id: "1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG"
+              path: "content/ressurser.md"
+            - id: "1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr"
+              path: "content/skilting_og_hensyn.md"
 
-      - name: Commit and push if changed
+      - name: Commit changes
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git add content/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Automatisk oppdatering av filer fra Google Drive" && git push)
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add content/*.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "Automatisk oppdatering fra Google Drive"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
