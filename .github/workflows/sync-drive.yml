@@ -8,24 +8,35 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v2
 
       - name: Google Drive Files Sync
-        uses: pew-actions/google-drive-download@main
+        uses: wei/wget@v1
         with:
-          credentials: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
-          files: |
-            - id: "1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE"
-              path: "content/prosjektstatus.md"
-            - id: "1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR"
-              path: "content/beskrivelse.md"
-            - id: "1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2"
-              path: "content/arbeidsliste.md"
-            - id: "1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG"
-              path: "content/ressurser.md"
-            - id: "1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr"
-              path: "content/skilting_og_hensyn.md"
+          args: -O content/prosjektstatus.md "https://drive.google.com/uc?export=download&id=1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE"
+
+      - name: Download beskrivelse
+        uses: wei/wget@v1
+        with:
+          args: -O content/beskrivelse.md "https://drive.google.com/uc?export=download&id=1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR"
+
+      - name: Download arbeidsliste
+        uses: wei/wget@v1
+        with:
+          args: -O content/arbeidsliste.md "https://drive.google.com/uc?export=download&id=1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2"
+
+      - name: Download ressurser
+        uses: wei/wget@v1
+        with:
+          args: -O content/ressurser.md "https://drive.google.com/uc?export=download&id=1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG"
+
+      - name: Download skilting
+        uses: wei/wget@v1
+        with:
+          args: -O content/skilting_og_hensyn.md "https://drive.google.com/uc?export=download&id=1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr"
 
       - name: Commit changes
         run: |
