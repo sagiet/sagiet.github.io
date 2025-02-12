@@ -310,7 +310,7 @@
 
         // Last inn innhold fra Google Drive
         async function loadGoogleDriveFile(fileId) {
-            const driveUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            const driveUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
             try {
                 const response = await fetch(driveUrl, {
                     method: 'GET',
