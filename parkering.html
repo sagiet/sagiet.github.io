@@ -29,25 +29,37 @@
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .nav-menu a {
             color: white;
             text-decoration: none;
             padding: 5px 10px;
             margin: 0 5px;
+            cursor: pointer;
         }
         .nav-menu a:hover {
             background-color: #34495e;
+            border-radius: 3px;
+        }
+        .nav-menu a.active {
+            background-color: #3498db;
             border-radius: 3px;
         }
         .content {
             margin-top: 20px;
         }
         .file-section {
+            display: none;
             margin-bottom: 30px;
             padding: 20px;
             background-color: #f8f9fa;
             border-radius: 5px;
+        }
+        .file-section.active {
+            display: block;
         }
         .update-info {
             color: #666;
@@ -108,16 +120,16 @@
 
         <div class="nav-menu">
             <a href="index.html">Hjem</a>
-            <a href="#readme">README</a>
-            <a href="#beskrivelse">Beskrivelse</a>
-            <a href="#status">Status</a>
-            <a href="#arbeidsliste">Arbeidsliste</a>
-            <a href="#ressurser">Ressurser</a>
-            <a href="#skilting">Skilting</a>
+            <a href="#" data-page="readme" class="active">README</a>
+            <a href="#" data-page="beskrivelse">Beskrivelse</a>
+            <a href="#" data-page="status">Status</a>
+            <a href="#" data-page="arbeidsliste">Arbeidsliste</a>
+            <a href="#" data-page="ressurser">Ressurser</a>
+            <a href="#" data-page="skilting">Skilting</a>
         </div>
 
         <div class="content">
-            <div id="readme" class="file-section">
+            <div id="readme" class="file-section active">
                 <h3>README</h3>
                 <div class="markdown-content"></div>
             </div>
@@ -161,24 +173,42 @@
             gfm: true
         });
 
+        // Last inn Markdown-fil og vis den
         async function loadMarkdownFile(filename, elementId) {
             try {
                 const response = await fetch(filename);
                 const text = await response.text();
-                // Konverter Markdown til HTML og sett inn i elementet
                 document.querySelector(`#${elementId} .markdown-content`).innerHTML = marked.parse(text);
             } catch (error) {
                 console.error(`Error loading ${filename}:`, error);
             }
         }
 
-        // Last inn alle MD-filer
+        // Håndter menynavigasjon
+        document.querySelectorAll('.nav-menu a[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = e.target.dataset.page;
+                
+                // Oppdater aktiv lenke
+                document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Vis valgt side, skjul andre
+                document.querySelectorAll('.file-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(pageId).classList.add('active');
+                
+                // Last inn innhold hvis det ikke er lastet inn ennå
+                if (!document.querySelector(`#${pageId} .markdown-content`).innerHTML) {
+                    loadMarkdownFile(`parkering/${pageId}.md`, pageId);
+                }
+            });
+        });
+
+        // Last inn README som standard
         loadMarkdownFile('parkering/README.md', 'readme');
-        loadMarkdownFile('parkering/beskrivelse.md', 'beskrivelse');
-        loadMarkdownFile('parkering/prosjektstatus.md', 'status');
-        loadMarkdownFile('parkering/arbeidsliste.md', 'arbeidsliste');
-        loadMarkdownFile('parkering/ressurser.md', 'ressurser');
-        loadMarkdownFile('parkering/skilting_og_hensyn.md', 'skilting');
     </script>
 </body>
 </html>
