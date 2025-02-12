@@ -171,6 +171,21 @@
         .markdown-content a:hover {
             text-decoration: underline;
         }
+        .comment-button {
+            background-color: #27ae60;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .comment-button:hover {
+            background-color: #2ecc71;
+        }
     </style>
 </head>
 <body>
@@ -180,43 +195,73 @@
 
         <div class="nav-menu">
             <a href="index.html">Hjem</a>
-            <a href="#" data-page="README">README</a>
             <a href="#" data-page="beskrivelse">Beskrivelse</a>
             <a href="#" data-page="prosjektstatus">Status</a>
             <a href="#" data-page="arbeidsliste">Arbeidsliste</a>
             <a href="#" data-page="ressurser">Ressurser</a>
             <a href="#" data-page="skilting_og_hensyn">Skilting</a>
+            <a href="#" data-page="kontaktinfo">Kontakt</a>
         </div>
 
         <div class="content">
-            <div id="README" class="file-section">
-                <h3>README</h3>
-                <div class="markdown-content"></div>
-            </div>
-
-            <div id="beskrivelse" class="file-section">
+            <div id="beskrivelse" class="file-section active">
                 <h3>Prosjektbeskrivelse</h3>
                 <div class="markdown-content"></div>
+                <a href="https://docs.google.com/document/d/1ePid3ldGnsO4NLgJWiln-1w23xFCuqkr_z4bQlYW9Mg/edit?usp=sharing" 
+                   class="comment-button" 
+                   target="_blank">
+                    💬 Kommentarer
+                </a>
             </div>
 
             <div id="prosjektstatus" class="file-section">
                 <h3>Prosjektstatus</h3>
                 <div class="markdown-content"></div>
+                <a href="https://docs.google.com/document/d/1ePid3ldGnsO4NLgJWiln-1w23xFCuqkr_z4bQlYW9Mg/edit?usp=sharing" 
+                   class="comment-button" 
+                   target="_blank">
+                    💬 Kommentarer
+                </a>
             </div>
 
             <div id="arbeidsliste" class="file-section">
                 <h3>Arbeidsliste</h3>
                 <div class="markdown-content"></div>
+                <a href="https://docs.google.com/document/d/1ePid3ldGnsO4NLgJWiln-1w23xFCuqkr_z4bQlYW9Mg/edit?usp=sharing" 
+                   class="comment-button" 
+                   target="_blank">
+                    💬 Kommentarer
+                </a>
             </div>
 
             <div id="ressurser" class="file-section">
                 <h3>Ressurser</h3>
                 <div class="markdown-content"></div>
+                <a href="https://docs.google.com/document/d/1ePid3ldGnsO4NLgJWiln-1w23xFCuqkr_z4bQlYW9Mg/edit?usp=sharing" 
+                   class="comment-button" 
+                   target="_blank">
+                    💬 Kommentarer
+                </a>
             </div>
 
             <div id="skilting_og_hensyn" class="file-section">
                 <h3>Skilting og Hensyn</h3>
                 <div class="markdown-content"></div>
+                <a href="https://docs.google.com/document/d/1ePid3ldGnsO4NLgJWiln-1w23xFCuqkr_z4bQlYW9Mg/edit?usp=sharing" 
+                   class="comment-button" 
+                   target="_blank">
+                    💬 Kommentarer
+                </a>
+            </div>
+
+            <div id="kontaktinfo" class="file-section">
+                <h3>Kontaktinformasjon</h3>
+                <div class="markdown-content"></div>
+                <a href="https://docs.google.com/document/d/1ePid3ldGnsO4NLgJWiln-1w23xFCuqkr_z4bQlYW9Mg/edit?usp=sharing" 
+                   class="comment-button" 
+                   target="_blank">
+                    💬 Kommentarer
+                </a>
             </div>
         </div>
 
@@ -284,12 +329,12 @@
 
         // Håndter direkte URL-navigasjon
         window.addEventListener('hashchange', () => {
-            const pageId = window.location.hash.slice(1) || 'README';
+            const pageId = window.location.hash.slice(1) || 'beskrivelse';
             showPage(pageId);
         });
 
         // Initialiser siden
-        const initialPage = window.location.hash.slice(1) || 'README';
+        const initialPage = window.location.hash.slice(1) || 'beskrivelse';
         showPage(initialPage);
     </script>
 </body>
