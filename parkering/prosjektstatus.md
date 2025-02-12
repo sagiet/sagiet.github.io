@@ -4,13 +4,12 @@
 
 - **Fremdrift:** 20%
 - **Fase:** Planlegging
-- **Risiko:** Lav
 - **Sist oppdatert:** 11.02.2025
 - **Team:** 
   * Jan Erik (prosjektleder)
   * Per Christian
   * Geir Atle Haug
-  * Kjstotis
+  * Kestas
   * Øvrige roller avventer tildeling
 
 ## Milepæler
