@@ -1,7 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eidsfoss Marked 2025 - Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .status-item {
+            margin-bottom: 10px;
+        }
+        .progress {
+            background-color: #eee;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background-color: #3498db;
+            height: 100%;
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+        .team-member {
+            padding: 5px 0;
+        }
+        .milestone {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+        }
+        .update-info {
+            color: #666;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div class="container">
+        <h1>Eidsfoss Marked 2025</h1>
+        <h2>Parkeringsgruppe - Status</h2>
+
+        <div class="status-item">
+            <h3>Overordnet Status</h3>
+            <p>Fremdrift:</p>
+            <div class="progress">
+                <div class="progress-bar" style="width: 20%;" title="20% fullført"></div>
+            </div>
+            <p>Fase: Planlegging</p>
+            <p>Risiko: Lav</p>
+        </div>
+
+        <div class="status-item">
+            <h3>Team</h3>
+            <div class="team-member">• Jan Erik (prosjektleder)</div>
+            <div class="team-member">• Per Christian</div>
+            <div class="team-member">• Geir Atle Haug</div>
+            <div class="team-member">• Kjstotis</div>
+            <p><i>Øvrige roller avventer tildeling</i></p>
+        </div>
+
+        <div class="status-item">
+            <h3>Milepæler</h3>
+            <div class="milestone">
+                <h4>1. Prosjektorganisering (45%)</h4>
+                <p>✓ Etablert parkeringsgruppe<br>
+                ✓ Utnevnt prosjektleder (Jan Erik)<br>
+                → Definere og tildele roller til teammedlemmer<br>
+                ✓ Første møte gjennomført (11.02.2025)</p>
+            </div>
+            <div class="milestone">
+                <h4>2. Planlegging (0%)</h4>
+                <p>× Områdekartlegging<br>
+                × Kapasitetsberegning<br>
+                × Detaljert plan</p>
+            </div>
+        </div>
+
+        <div class="status-item">
+            <h3>Neste Steg</h3>
+            <ol>
+                <li><s>Rekruttere kjerneteam</s></li>
+                <li>Definere og tildele roller til teammedlemmer</li>
+                <li>Fordele arbeidsoppgaver basert på arbeidsliste</li>
+                <li>Neste møte 24. februar 18:00 på hovedgården</li>
+                <li>Starte detaljplanlegging</li>
+            </ol>
+        </div>
+
+        <p class="update-info">Sist oppdatert: 11.02.2025</p>
+    </div>
 </body>
 </html>
