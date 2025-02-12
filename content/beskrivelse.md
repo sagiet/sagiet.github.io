@@ -1,6 +1,6 @@
 # Parkering - Eidsfoss Marked
 
-Ser du dette så har vi automatisk opdatering fra google disk og lokal hd
+tester på ato opdatering
 
 ## Prosjektinformasjon
 
