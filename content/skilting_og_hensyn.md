@@ -1,76 +1,105 @@
-# Skilting og Hensyn - Parkering Eidsfoss Marked
+# Skilting og Spesielle Hensyn
 
-## Skilting
+## Kirkehensyn
+### Søndag
+- **Kirketid:** [Tid for gudstjeneste]
+- **Parkering reservert for kirkegjengere**
+- **Tydelig skilting:**
+  * "Reservert kirkeparkering"
+  * "Vennligst respekter kirkens aktiviteter"
+  * Tidspunkt for gudstjeneste
 
-### Hovedskilting
-1. **Innkjøring til Eidsfoss**
-   - Velkommen til Eidsfoss Marked
-   - Parkeringshenvisning
-   - Betalingsinformasjon
+### Skiltplassering ved kirke
+```
+KIRKE ➡️        [KIRKEPARKERING]
+               🚫 Ingen markedsparkering
+               ⏰ Søndag [tid]
+```
 
-2. **Parkeringsområder**
-   - Kapasitetsinfo
-   - Retningspiler
-   - Områdenummer/navn
+## Tekniske Skilt
 
-3. **Shuttlebuss**
-   - Stoppesteder
-   - Rutetider
-   - Kjørerute
+### 1. Hovedinnkjøring
+```
+PARKERING ➡️    [P1-P3]
+💳 Betal med Vipps/kort
+🚗 Følg vaktenes anvisning
+```
 
-### Informasjonsskilting
-- Kart over området
-- Gangveier til marked
-- Kultursti-informasjon
-- Nødutganger/rømningsveier
+### 2. Parkeringsområder
+```
+P1 ➡️ Hovedparkering
+P2 ➡️ Fjernparkering + Shuttlebuss
+P3 ➡️ Reserve/Overflow
+♿ HC-parkering
+```
 
-## Hensyn
+### 3. Betalingsinformasjon
+```
+PARKERING 50kr/dag
+💳 Vipps
+📱 Skann QR-kode
+ℹ️ Info: [telefon]
+```
 
-### Miljøhensyn
-1. **Naturområder**
-   - Unngå parkering i sårbare områder
-   - Beskyttelse av vegetasjon
-   - Avfallshåndtering
+### 4. Shuttlebuss
+```
+🚌 GRATIS SHUTTLEBUSS
+⏰ Hver 15. min
+🚶 2 min til holdeplass
+```
 
-2. **Støy**
-   - Redusere tomgangskjøring
-   - Stille områder ved bebyggelse
-   - Tidsbegrensninger for inn/utkjøring
+### 5. Retningsskilt
+```
+← Marked
+→ Parkering
+↑ Toaletter
+↓ Shuttlebuss
+```
 
-### Lokale Hensyn
-1. **Beboere**
-   - Sikre tilgang til private eiendommer
-   - Støyreduserende tiltak
-   - Informasjon til naboer
+### 6. Advarselsskilt
+```
+⚠️ Parkering på eget ansvar
+🚫 Ingen parkering utenfor merkede områder
+⛔ Respekter sperringer
+```
 
-2. **Kulturminner**
-   - Beskyttelse av historiske områder
-   - Informasjon om kulturminner
-   - Tilpasset skilting
+## Skiltplassering
 
-### Sikkerhetshensyn
-1. **Trafikksikkerhet**
-   - Fotgjengerfelt
-   - Fartsgrenser
-   - Belysning
+### Hovedveier
+1. 500m før marked
+2. 200m før marked
+3. Ved innkjøring
 
-2. **Beredskap**
-   - Nødutganger
-   - Ambulansetilgang
-   - Brannveier
+### Parkeringsområder
+1. Ved innkjøring
+2. Ved betalingspunkt
+3. Ved utkjøring
 
-## Spesielle Tiltak
-1. **Kirkens område**
-   - Respekt for kirkelige aktiviteter
-   - Tilpasset skilting
-   - Begrenset parkeringstid
+### Shuttlebuss
+1. Ved fjernparkering
+2. Ved holdeplasser
+3. Ved markedsområde
 
-2. **Kulturstien**
-   - Integrert skilting
-   - Informasjonspunkter
-   - Beskyttelse av stien
+## Skilttyper
+1. **Permanente skilt**
+   - Retningsskilt
+   - Områdemarkering
+   - Advarselsskilt
 
-3. **Verksområdet**
-   - Historisk tilpasning
-   - Begrenset kjøring
-   - Spesiell skilting
+2. **Midlertidige skilt**
+   - Dagens info
+   - Spesielle beskjeder
+   - Endringer
+
+3. **Digital info**
+   - QR-koder
+   - Vipps-info
+   - Kontaktinfo
+
+## Vedlikehold
+- Daglig sjekk av skilt
+- Rengjøring ved behov
+- Rask utskifting ved skade
+- Oppdatering av digital info
+
+*Sist oppdatert: 11.02.2025*
