@@ -58,7 +58,7 @@ parkering/
 - Prosjektleder: Jan Erik
 - Teknisk Ansvarlig: Per Christian
 - Områdeansvarlig: Geir Atle Haug
-- Trafikkansvarlig: Kjstotis
+- Trafikkansvarlig: Kestas
 
 ## Oppdateringsrutiner
 1. Ved fullførte oppgaver:

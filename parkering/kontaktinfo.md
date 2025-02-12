@@ -25,7 +25,7 @@ Per Hopen tlf 93830262 zagiet@gmail.com
 
 ### Teknisk Ansvarlig
 
-- **Navn:** Kjstotis
+- **Navn:** Kestas
 - **Telefon:** [Avventer]
 - **E-post:** [Avventer]
 - **Rolle:** Teknisk Ansvarlig/Ingeniør

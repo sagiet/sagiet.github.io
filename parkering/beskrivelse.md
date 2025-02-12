@@ -32,7 +32,7 @@
   * HMS og sikkerhet
   * Personal og konfliktløsning
 
-- **Trafikkansvarlig:** [Kjstotis]
+- **Trafikkansvarlig:** [Kestas]
   
   * Trafikkflyt og køsystemer
   * Områdeplanlegging og skilting
