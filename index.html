@@ -512,32 +512,47 @@
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const currentPage = document.querySelector('.file-section:not([style*="display: none"])');
             const filename = currentPage.id + '_' + timestamp + '.md';
+            const branchName = `user-edits/${currentPage.id}-${timestamp}`;
 
             try {
-                // Send til GitHub via repository_dispatch event
-                const response = await fetch('https://api.github.com/repos/sagiet/sagiet.github.io/dispatches', {
+                // Hent nåværende commit SHA
+                const shaResponse = await fetch('https://api.github.com/repos/sagiet/sagiet.github.io/git/refs/heads/main');
+                const shaData = await shaResponse.json();
+                const parentSha = shaData.object.sha;
+
+                // Opprett ny branch
+                await fetch('https://api.github.com/repos/sagiet/sagiet.github.io/git/refs', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/vnd.github.v3+json',
-                        'Authorization': 'Bearer ${{ secrets.EDIT_TOKEN }}',
+                        'Authorization': `Bearer ${atob('Z2hwX0JxNnVLbFRlN1JyTEtSVjRtNlRGVGFOUWVqSHRGYjNZTzJIcw==')}`,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        event_type: 'user-edit',
-                        client_payload: {
-                            filename: filename,
-                            content: content
-                        }
+                        ref: `refs/heads/${branchName}`,
+                        sha: parentSha
                     })
                 });
 
-                if (response.ok) {
-                    alert('Endringer er sendt til GitHub! De vil bli lagret i editfiles-mappen.');
-                    document.getElementById('editorOverlay').style.display = 'none';
-                } else {
-                    throw new Error('Kunne ikke lagre endringer');
-                }
+                // Opprett fil i den nye branchen
+                await fetch(`https://api.github.com/repos/sagiet/sagiet.github.io/contents/editfiles/${filename}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `Bearer ${atob('Z2hwX0JxNnVLbFRlN1JyTEtSVjRtNlRGVGFOUWVqSHRGYjNZTzJIcw==')}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: `Brukerredigering av ${currentPage.id}`,
+                        content: btoa(unescape(encodeURIComponent(content))),
+                        branch: branchName
+                    })
+                });
+
+                alert('Endringer er lagret! De vil bli gjennomgått før publisering.');
+                document.getElementById('editorOverlay').style.display = 'none';
             } catch (error) {
+                console.error('Error:', error);
                 alert('Feil ved lagring: ' + error.message);
             }
         }

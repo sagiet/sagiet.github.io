@@ -3,6 +3,9 @@ name: Handle User Edits
 on:
   repository_dispatch:
     types: [user-edit]
+  push:
+    branches:
+      - 'user-edits/**'
 
 jobs:
   save-edit:
@@ -29,3 +32,25 @@ jobs:
           git add editfiles/
           git commit -m "Lagret brukerredigering: ${{ github.event.client_payload.filename }}" || exit 0
           git push
+
+  create-pull-request:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Brukerredigering av innhold
+          title: 'Ny brukerredigering'
+          body: |
+            Dette er en automatisk generert Pull Request fra en brukerredigering.
+            
+            Vennligst gjennomgå endringene før de godkjennes.
+          branch: ${{ github.ref }}
+          base: main
