@@ -1,4 +1,6 @@
-# Parkering - Eidsfoss Marked test
+# Parkering - Eidsfoss Marked
+
+Ser du dette så har vi automatisk opdatering fra google disk og lokal hd
 
 ## Prosjektinformasjon
 
