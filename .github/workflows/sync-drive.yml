@@ -13,30 +13,38 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Google Drive Files Sync
-        uses: wei/wget@v1
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          args: -O content/prosjektstatus.md "https://drive.google.com/uc?export=download&id=1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE"
+          python-version: '3.x'
 
-      - name: Download beskrivelse
-        uses: wei/wget@v1
-        with:
-          args: -O content/beskrivelse.md "https://drive.google.com/uc?export=download&id=1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
 
-      - name: Download arbeidsliste
-        uses: wei/wget@v1
-        with:
-          args: -O content/arbeidsliste.md "https://drive.google.com/uc?export=download&id=1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2"
+      - name: Download and save files
+        run: |
+          mkdir -p content
+          # Prosjektstatus
+          curl -L "https://drive.google.com/uc?export=download&id=1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE" -o content/prosjektstatus.md
+          # Beskrivelse
+          curl -L "https://drive.google.com/uc?export=download&id=1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR" -o content/beskrivelse.md
+          # Arbeidsliste
+          curl -L "https://drive.google.com/uc?export=download&id=1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2" -o content/arbeidsliste.md
+          # Ressurser
+          curl -L "https://drive.google.com/uc?export=download&id=1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG" -o content/ressurser.md
+          # Skilting
+          curl -L "https://drive.google.com/uc?export=download&id=1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr" -o content/skilting_og_hensyn.md
 
-      - name: Download ressurser
-        uses: wei/wget@v1
-        with:
-          args: -O content/ressurser.md "https://drive.google.com/uc?export=download&id=1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG"
-
-      - name: Download skilting
-        uses: wei/wget@v1
-        with:
-          args: -O content/skilting_og_hensyn.md "https://drive.google.com/uc?export=download&id=1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr"
+      - name: Check file contents
+        run: |
+          echo "Checking file contents..."
+          for file in content/*.md; do
+            echo "=== $file ==="
+            cat "$file"
+            echo
+          done
 
       - name: Commit changes
         run: |
