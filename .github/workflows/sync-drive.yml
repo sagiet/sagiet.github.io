@@ -26,34 +26,63 @@ jobs:
       - name: Download and save files
         run: |
           mkdir -p content
+          echo "Downloading files..."
+          
           # Prosjektstatus
+          echo "Downloading prosjektstatus.md..."
           curl -L "https://drive.google.com/uc?export=download&id=1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE" -o content/prosjektstatus.md
+          echo "Content of prosjektstatus.md:"
+          cat content/prosjektstatus.md
+          
           # Beskrivelse
+          echo "Downloading beskrivelse.md..."
           curl -L "https://drive.google.com/uc?export=download&id=1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR" -o content/beskrivelse.md
+          echo "Content of beskrivelse.md:"
+          cat content/beskrivelse.md
+          
           # Arbeidsliste
+          echo "Downloading arbeidsliste.md..."
           curl -L "https://drive.google.com/uc?export=download&id=1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2" -o content/arbeidsliste.md
+          echo "Content of arbeidsliste.md:"
+          cat content/arbeidsliste.md
+          
           # Ressurser
+          echo "Downloading ressurser.md..."
           curl -L "https://drive.google.com/uc?export=download&id=1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG" -o content/ressurser.md
+          echo "Content of ressurser.md:"
+          cat content/ressurser.md
+          
           # Skilting
+          echo "Downloading skilting_og_hensyn.md..."
           curl -L "https://drive.google.com/uc?export=download&id=1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr" -o content/skilting_og_hensyn.md
+          echo "Content of skilting_og_hensyn.md:"
+          cat content/skilting_og_hensyn.md
 
-      - name: Check file contents
+      - name: Check for changes
+        id: check_changes
         run: |
-          echo "Checking file contents..."
-          for file in content/*.md; do
-            echo "=== $file ==="
-            cat "$file"
-            echo
-          done
+          echo "Checking for changes..."
+          git status
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Changes detected"
+            echo "::set-output name=has_changes::true"
+          else
+            echo "No changes detected"
+            echo "::set-output name=has_changes::false"
+          fi
 
       - name: Commit changes
+        if: steps.check_changes.outputs.has_changes == 'true'
         run: |
+          echo "Committing changes..."
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add content/*.md
-          git diff --quiet && git diff --staged --quiet || git commit -m "Automatisk oppdatering fra Google Drive"
+          git status
+          git commit -m "Automatisk oppdatering fra Google Drive"
           
       - name: Push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
