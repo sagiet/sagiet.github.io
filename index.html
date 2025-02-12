@@ -331,13 +331,11 @@
         // Last inn Markdown-fil og vis den
         async function loadMarkdownFile(filename, elementId) {
             try {
-                // Bruk relative stier fra root
-                const response = await fetch(`/content/${elementId}.md`);
+                const response = await fetch(`content/${elementId}.md`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const text = await response.text();
-                console.log('Lastet innhold:', text.substring(0, 100)); // For debugging
                 const htmlContent = marked.parse(text);
                 document.querySelector(`#${elementId} .markdown-content`).innerHTML = htmlContent;
             } catch (error) {
@@ -346,9 +344,6 @@
                     `<div style="padding: 20px; background-color: #fff3f3; border-left: 4px solid #ff5252; margin: 10px 0;">
                         <h3 style="color: #d32f2f; margin-top: 0;">Feil ved lasting av innhold</h3>
                         <p style="color: #555;">Kunne ikke laste innhold: ${error.message}</p>
-                        <p style="color: #666; font-size: 0.9em; margin-top: 10px;">
-                            Path: /content/${elementId}.md
-                        </p>
                     </div>`;
             }
         }
