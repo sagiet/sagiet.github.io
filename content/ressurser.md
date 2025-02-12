@@ -1,51 +1,46 @@
 # Ressurser - Parkering Eidsfoss Marked
 
-## Tilgjengelige Ressurser
+## Personal
 
-### Personell
-- Prosjektleder: Jan Erik
-- Smits venner: Tilgjengelig for vakter
-- Nattevakter: Koordineres med Irene
-- Frivillige: Under rekruttering
+### Kjerneteam (4)
 
-### Områder
-- Utenfor verket: Ca. 200 plasser
-- Fruene på smia: Ca. 150 plasser
-- Hovedgården: Under vurdering
-- Kirken: Under forhandling
-- Tilleggsarealer: Under kartlegging
+- Parkeringsleder
+- Teknisk ansvarlig
+- Vaktkoordinator
+- Trafikkansvarlig
 
-### Utstyr
-- Betalingsterminaler: Må anskaffes
-- Skilt: Under planlegging
-- Vester til vakter: 20 stk tilgjengelig
-- Kommunikasjonsutstyr: Må anskaffes
+### Støtteteam (20-25)
 
-### Transport
-- Shuttlebuss: Under planlegging
-- Sykkelstativer: 10 stk tilgjengelig
-- Gangveier: Eksisterende infrastruktur
+- 3-4 områdeansvarlige
+- 15-20 vakter
+- 4-5 reserve
 
-## Behov
+## Utstyr
 
-### Umiddelbare Behov
-1. Flere parkeringsvakter
-2. Betalingsløsning
-3. Skiltmateriell
-4. Kommunikasjonsutstyr
+### Personlig
 
-### Langsiktige Behov
-1. Permanent skilting
-2. Digital infrastruktur
-3. Opplæringsmateriell
-4. Dokumentasjonssystem
+- 30 vester med nummer
+- 20 walkietalkies
+- 20 lommelykter
+- 20 sett regntøy
+
+### Område
+
+- 50 parkeringsskilt
+- 1000m sperrebånd
+- 100 kjegler
+- 10 betalingsterminaler
+- Telt/Parasoller til vær parkerings plass
+
+## Infrastruktur
+
+- Parkeringsområder
+- Shuttlebusser
+- Strømtilførsel
+- Belysning
 
 ## Budsjett
-- Parkeringsavgift: 75 kr per bil
-- Forventet inntekt: Under beregning
-- Kostnadsramme: Under utarbeidelse
 
-## Eksterne Ressurser
-- Kommunen: Skiltvedtak
-- Grunneiere: Tilleggsarealer
-- Lokale leverandører: Under kartlegging
+[Detaljert budsjett legges til]
+
+*Sist oppdatert: 11.02.2025*
