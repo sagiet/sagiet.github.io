@@ -1,0 +1,31 @@
+name: Handle User Edits
+
+on:
+  repository_dispatch:
+    types: [user-edit]
+
+jobs:
+  save-edit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.EDIT_TOKEN }}
+      
+      - name: Create editfiles directory if not exists
+        run: mkdir -p editfiles
+      
+      - name: Save edit to file
+        run: |
+          echo "${{ github.event.client_payload.content }}" > "editfiles/${{ github.event.client_payload.filename }}"
+          
+      - name: Commit and push if there are changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add editfiles/
+          git commit -m "Lagret brukerredigering: ${{ github.event.client_payload.filename }}" || exit 0
+          git push
