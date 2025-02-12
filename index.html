@@ -299,31 +299,31 @@
             mangle: false
         });
 
-        // Konfigurasjon for Google Drive filer
-        const driveFiles = {
-            'beskrivelse': '1Xbe8MH4ISzX3TcyQfMJlyjhNdQTPhaGR',
-            'prosjektstatus': '1rYjTVcbx_yQVPAt_LrEuPdPpDWFz3PhE',
-            'arbeidsliste': '1zvUPM-cITgVyNWBc9GI_1Xgrf9-EKed2',
-            'ressurser': '1kgt2xCY_om0Tz99E_qPYMfHBFrQtjYLG',
-            'skilting_og_hensyn': '1Q9SYD2d4tZbGfLDB1wmli2re5aXySSNr'
+        // Konfigurasjon for Google Docs publiserte dokumenter
+        const publishedDocs = {
+            'arbeidsliste': 'https://docs.google.com/document/d/e/2PACX-1vTUnqE7F_YtHI3knTsVICaB7t6vtD6oVWAN2oHehNOnZTKF_C8-UyzMp2P6bhX6A6vCHoJEgbdlfVRg/pub',
+            'prosjektstatus': '',  // Venter på URL
+            'beskrivelse': '',     // Venter på URL
+            'ressurser': '',       // Venter på URL
+            'skilting_og_hensyn': '' // Venter på URL
         };
 
-        // Last inn innhold fra Google Drive
-        async function loadGoogleDriveFile(fileId) {
-            const driveUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+        // Last inn innhold fra Google Docs
+        async function loadGoogleDocsContent(url) {
             try {
-                const response = await fetch(driveUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'text/plain, text/markdown'
-                    }
-                });
+                const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                return await response.text();
+                const html = await response.text();
+                
+                // Hent bare innholdet fra Google Docs (fjern header og footer)
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const content = doc.querySelector('.doc-content');
+                return content ? content.innerHTML : html;
             } catch (error) {
-                console.error('Error loading from Google Drive:', error);
+                console.error('Error loading from Google Docs:', error);
                 throw error;
             }
         }
@@ -332,24 +332,21 @@
         async function loadMarkdownFile(filename, elementId) {
             try {
                 const pageName = elementId;
-                if (!driveFiles[pageName]) {
-                    throw new Error('Finner ikke fil-ID for denne siden');
+                if (!publishedDocs[pageName]) {
+                    throw new Error('Finner ikke publisert dokument for denne siden');
                 }
                 
-                // Last fra Google Drive
-                const text = await loadGoogleDriveFile(driveFiles[pageName]);
-                const htmlContent = marked.parse(text);
-                document.querySelector(`#${elementId} .markdown-content`).innerHTML = htmlContent;
+                // Last fra Google Docs
+                const content = await loadGoogleDocsContent(publishedDocs[pageName]);
+                document.querySelector(`#${elementId} .markdown-content`).innerHTML = content;
             } catch (error) {
                 console.error(`Error loading ${filename}:`, error);
-                let feilmelding = 'Kunne ikke laste innhold fra Google Drive. ';
+                let feilmelding = 'Kunne ikke laste innhold fra Google Docs. ';
                 
                 if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
-                    feilmelding += 'Ingen forbindelse til Google Drive. Sjekk internettforbindelsen din.';
-                } else if (error.message.includes('HTTP error! status: 404')) {
-                    feilmelding += 'Filen ble ikke funnet i Google Drive.';
-                } else if (error.message.includes('HTTP error! status: 403')) {
-                    feilmelding += 'Ingen tilgang til filen. Sjekk at delingsinnstillingene er korrekte.';
+                    feilmelding += 'Ingen forbindelse til Google Docs. Sjekk internettforbindelsen din.';
+                } else if (error.message.includes('Finner ikke publisert')) {
+                    feilmelding += 'Dokumentet er ikke publisert ennå.';
                 } else {
                     feilmelding += 'Det oppstod en feil ved lasting av innholdet. Prøv å laste siden på nytt.';
                 }
