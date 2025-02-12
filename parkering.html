@@ -61,6 +61,44 @@
             overflow-x: auto;
             white-space: pre-wrap;
         }
+        /* Markdown styling */
+        .markdown-content {
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .markdown-content h1 { font-size: 2em; margin-top: 1em; }
+        .markdown-content h2 { font-size: 1.5em; margin-top: 0.83em; }
+        .markdown-content h3 { font-size: 1.17em; margin-top: 1em; }
+        .markdown-content ul, .markdown-content ol { padding-left: 2em; }
+        .markdown-content code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .markdown-content pre {
+            background-color: #f8f9fa;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .markdown-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        .markdown-content th, .markdown-content td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .markdown-content th {
+            background-color: #f8f9fa;
+        }
+        .markdown-content tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 <body>
@@ -81,44 +119,54 @@
         <div class="content">
             <div id="readme" class="file-section">
                 <h3>README</h3>
-                <pre></pre>
+                <div class="markdown-content"></div>
             </div>
 
             <div id="beskrivelse" class="file-section">
                 <h3>Prosjektbeskrivelse</h3>
-                <pre></pre>
+                <div class="markdown-content"></div>
             </div>
 
             <div id="status" class="file-section">
                 <h3>Prosjektstatus</h3>
-                <pre></pre>
+                <div class="markdown-content"></div>
             </div>
 
             <div id="arbeidsliste" class="file-section">
                 <h3>Arbeidsliste</h3>
-                <pre></pre>
+                <div class="markdown-content"></div>
             </div>
 
             <div id="ressurser" class="file-section">
                 <h3>Ressurser</h3>
-                <pre></pre>
+                <div class="markdown-content"></div>
             </div>
 
             <div id="skilting" class="file-section">
                 <h3>Skilting og Hensyn</h3>
-                <pre></pre>
+                <div class="markdown-content"></div>
             </div>
         </div>
 
         <p class="update-info">Sist oppdatert: 12.02.2025</p>
     </div>
 
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <script>
+        // Konfigurer marked.js
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
         async function loadMarkdownFile(filename, elementId) {
             try {
                 const response = await fetch(filename);
                 const text = await response.text();
-                document.querySelector(`#${elementId} pre`).textContent = text;
+                // Konverter Markdown til HTML og sett inn i elementet
+                document.querySelector(`#${elementId} .markdown-content`).innerHTML = marked.parse(text);
             } catch (error) {
                 console.error(`Error loading ${filename}:`, error);
             }
