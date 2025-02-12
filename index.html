@@ -329,62 +329,22 @@
             mangle: false
         });
 
-        // Konfigurasjon for Google Docs publiserte dokumenter
-        const publishedDocs = {
-            'arbeidsliste': 'https://docs.google.com/document/d/e/2PACX-1vTUnqE7F_YtHI3knTsVICaB7t6vtD6oVWAN2oHehNOnZTKF_C8-UyzMp2P6bhX6A6vCHoJEgbdlfVRg/pub',
-            'prosjektstatus': '',  // Venter på URL
-            'beskrivelse': '',     // Venter på URL
-            'ressurser': '',       // Venter på URL
-            'skilting_og_hensyn': '' // Venter på URL
-        };
-
-        // Last inn innhold fra Google Docs
-        async function loadGoogleDocsContent(url) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const html = await response.text();
-                
-                // Hent bare innholdet fra Google Docs (fjern header og footer)
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const content = doc.querySelector('.doc-content');
-                return content ? content.innerHTML : html;
-            } catch (error) {
-                console.error('Error loading from Google Docs:', error);
-                throw error;
-            }
-        }
-
         // Last inn Markdown-fil og vis den
         async function loadMarkdownFile(filename, elementId) {
             try {
-                const pageName = elementId;
-                if (!publishedDocs[pageName]) {
-                    throw new Error('Finner ikke publisert dokument for denne siden');
+                const response = await fetch(`content/${elementId}.md`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
-                // Last fra Google Docs
-                const content = await loadGoogleDocsContent(publishedDocs[pageName]);
-                document.querySelector(`#${elementId} .markdown-content`).innerHTML = content;
+                const text = await response.text();
+                const htmlContent = marked.parse(text);
+                document.querySelector(`#${elementId} .markdown-content`).innerHTML = htmlContent;
             } catch (error) {
                 console.error(`Error loading ${filename}:`, error);
-                let feilmelding = 'Kunne ikke laste innhold fra Google Docs. ';
-                
-                if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
-                    feilmelding += 'Ingen forbindelse til Google Docs. Sjekk internettforbindelsen din.';
-                } else if (error.message.includes('Finner ikke publisert')) {
-                    feilmelding += 'Dokumentet er ikke publisert ennå.';
-                } else {
-                    feilmelding += 'Det oppstod en feil ved lasting av innholdet. Prøv å laste siden på nytt.';
-                }
-                
                 document.querySelector(`#${elementId} .markdown-content`).innerHTML = 
                     `<div style="padding: 20px; background-color: #fff3f3; border-left: 4px solid #ff5252; margin: 10px 0;">
                         <h3 style="color: #d32f2f; margin-top: 0;">Feil ved lasting av innhold</h3>
-                        <p style="color: #555;">${feilmelding}</p>
+                        <p style="color: #555;">Kunne ikke laste innhold. Vennligst prøv igjen senere.</p>
                         <p style="color: #666; font-size: 0.9em; margin-top: 10px;">
                             Hvis problemet vedvarer, ta kontakt med systemadministrator.
                         </p>
