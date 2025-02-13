@@ -1,0 +1,14 @@
+{
+  "name": "sagiet.github.io",
+  "version": "1.0.0",
+  "description": "Eidsfoss Marked - Parkeringsprosjekt",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "marked": "^11.2.0"
+  }
+}
